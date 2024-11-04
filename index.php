@@ -131,11 +131,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                                 $sql = "SELECT * FROM allStudents ";
                                 $statement = $connection->prepare($sql);
                                 $statement->execute();
-                                $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+                                $data = $statement->fetchAll(PDO::FETCH_OBJ);
 
-                                echo "<pre>";
-                                print_r($data);
+                                foreach ($data as $item):
                                 ?>
+                                    <tr>
+                                        <td><?php echo $item->id; ?> </td>
+                                        <td><?php echo $item->name; ?> </td>
+                                        <td><?php echo $item->email; ?> </td>
+                                        <td><?php echo $item->phone; ?> </td>
+                                        <td><?php echo $item->location; ?> </td>
+                                        <td><?php echo $item->gender; ?> </td>
+                                        <!-- <td><?php echo $item->action; ?> </td> -->
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
